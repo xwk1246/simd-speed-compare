@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-double fRand(double min, double max) {
-    double f = (double)rand() / RAND_MAX;
+float fRand(int min, int max) {
+    float f = (float)rand() / RAND_MAX;
     return min + f * (max - min);
 }
 
@@ -11,7 +11,7 @@ int main() {
     FILE* fp;
     fp = fopen("data.txt", "w");
     int rows, cols;
-    double x;
+    float x;
     scanf("%d%d", &rows, &cols);
     srand(time(NULL));
     for (int i = 0; i < rows * 2; i++) {

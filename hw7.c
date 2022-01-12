@@ -6,17 +6,17 @@ int main() {
     FILE* out;
     in = fopen("data.txt", "r");
     out = fopen("output.txt", "w");
-    double A[200][198];
-    double B[200][198];
-    double C[200];
+    float A[200][198];
+    float B[200][198];
+    float C[200];
     for (int i = 0; i < 200; i++) {
         for (int j = 0; j < 198; j++) {
-            fscanf(in, "%lf", &A[i][j]);
+            fscanf(in, "%f", &A[i][j]);
         }
     }
     for (int i = 0; i < 200; i++) {
         for (int j = 0; j < 198; j++) {
-            fscanf(in, "%lf", &B[i][j]);
+            fscanf(in, "%f", &B[i][j]);
         }
 
     }
@@ -27,7 +27,7 @@ int main() {
         }
     }
     for (int i = 0; i < 200; i++) {
-        fprintf(out, "%lf\n", C[i]);
+        fprintf(out, "%f\n", C[i]);
     }
     fclose(in);
     fclose(out);
