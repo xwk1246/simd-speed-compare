@@ -9,8 +9,8 @@ int main() {
     FILE* out;
     in = fopen("data.txt", "r");
     out = fopen("simdOutput.txt", "w");
-    float A[ROWS][COLS] __attribute__((aligned(32)));
-    float B[ROWS][COLS] __attribute__((aligned(32)));
+    float A[ROWS][200] __attribute__((aligned(32)));
+    float B[ROWS][200] __attribute__((aligned(32)));
     float C[ROWS] __attribute__((aligned(32)));
 
     __m256* pA256;
@@ -19,17 +19,17 @@ int main() {
 
 
     for (int i = 0; i < ROWS; i++) {
-        for (int j = 0; j < COLS; j++) {
+        for (int j = 0; j < ROWS; j++) {
             fscanf(in, "%f", &A[i][j]);
         }
     }
     for (int i = 0; i < ROWS; i++) {
-        for (int j = 0; j < COLS; j++) {
+        for (int j = 0; j < ROWS; j++) {
             fscanf(in, "%f", &B[i][j]);
         }
 
     }
-    __m256 tmp256;
+    __m256 tmp256 __attribute__((aligned(32)));
 
     for (int i = 0; i < ROWS; i++) {
         pA256 = (__m256*)(A[i]);
@@ -37,8 +37,6 @@ int main() {
             pB256 = (__m256*)(B[j]);
             tmp256 = _mm256_set1_ps(0.0);
             for (int k = 0; k < COLS / 8; k++) {
-                _mm256_mul_ps(pA256[k], pB256[k]);
-                // _mm256_add_ps(tmp256, _mm256_mul_ps(pA256[k], pB256[k]));
                 tmp256 = _mm256_add_ps(tmp256, _mm256_mul_ps(pA256[k], pB256[k]));
             }
             for (int k = 0; k < 8; k++) {

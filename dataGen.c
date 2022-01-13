@@ -9,11 +9,11 @@ float fRand(int min, int max) {
 
 int main() {
     FILE* fp;
-    fp = fopen("data.txt", "w");
     int rows, cols;
     float x;
     scanf("%d%d", &rows, &cols);
     srand(time(NULL));
+    fp = fopen("data.txt", "w");
     for (int i = 0; i < rows * 2; i++) {
         x = fRand(0, 100);
         fprintf(fp, "%f", x);
